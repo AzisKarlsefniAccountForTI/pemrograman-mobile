@@ -1,16 +1,32 @@
-# first_app
+# Praktikum Pemrograman Mobile - Pertemuan 4
 
-A new Flutter project.
+Repositori ini berisi tugas dan modul praktikum mata kuliah **Pemrograman Mobile**.
 
-## Getting Started
+## 👤 Identitas Mahasiswa
+- **Nama**: Azis Khoirul Setiawan
+- **NIM**: 43050250004
+- **Kelas**: 3A
 
-This project is a starting point for a Flutter application.
+---
 
-A few resources to get you started if this is your first Flutter project:
+## 📌 Deskripsi Modul 4
+Praktikum ini membahas pengenalan dasar Flutter, struktur project, konsep Widget tree, serta pembuatan aplikasi *Stateful* sederhana (Counter App).
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### Fitur & Pembahasan:
+- Pengenalan dasar widget (`Scaffold`, `AppBar`, `Text`, `FloatingActionButton`).
+- Manajemen state dasar menggunakan `StatefulWidget` dan `setState()`.
+- Modifikasi UI (tema warna, judul, dan penataan widget).
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+---
+
+## 🌿 Struktur Branch Repositori
+- **`main`**: Berisi implementasi Modul 4 (Dasar Flutter & Counter App).
+- **`materi-5`**: Berisi implementasi Modul 5 (Halaman Login, Register, Form Validation, & Navigasi).
+
+---
+
+## 🚀 Cara Menjalankan
+```bash
+git checkout main
+flutter pub get
+flutter run --android-skip-build-dependency-validation
