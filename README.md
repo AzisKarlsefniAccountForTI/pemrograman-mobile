@@ -1,16 +1,30 @@
-# first_app
+# Praktikum Pemrograman Mobile
 
-A new Flutter project.
+Repositori ini berisi kumpulan modul praktikum mata kuliah **Pemrograman Mobile**.
 
-## Getting Started
+## 👤 Identitas Mahasiswa
+- **Nama**: Azis Khoirul Setiawan
+- **NIM**: 43050250004
+- **Kelas**: 3A
 
-This project is a starting point for a Flutter application.
+---
 
-A few resources to get you started if this is your first Flutter project:
+## 🌿 Struktur Branch
+- **`main`**: Implementasi **Pertemuan 4** (Dasar Flutter & Counter App).
+- **`materi-5`**: Implementasi **Pertemuan 5** (Login, Register, Dashboard, & Validasi Form).
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+---
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 🚀 Cara Menjalankan Proyek (Materi 5)
+
+Pastikan perangkat/emulator Android sudah terhubung, lalu jalankan perintah berikut:
+
+```bash
+# 1. Masuk ke direktori proyek dan beralih ke branch materi-5
+git checkout materi-5
+
+# 2. Ambil seluruh dependensi
+flutter pub get
+
+# 3. Jalankan aplikasi ke perangkat
+flutter run --android-skip-build-dependency-validation
