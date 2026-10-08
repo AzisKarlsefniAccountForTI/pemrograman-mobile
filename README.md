@@ -1,57 +1,31 @@
-# Laporan Praktikum Pemrograman Mobile
-## Modul 4: Pengenalan Flutter & Manajemen State Dasar
+# Laporan Praktikum Pemrograman Mobile - Pertemuan 4
 
----
-
-### Data Mahasiswa
+## Identitas Mahasiswa
 * **Nama**: Azis Khoirul Setiawan
 * **NIM**: 43050250004
 * **Kelas**: 3A
-* **Mata Kuliah**: Pemrograman Mobile
 
 ---
 
-### 1. Tujuan Praktikum
-* Memahami struktur dasar arsitektur proyek aplikasi Flutter.
-* Mengenal hierarki komponen antarmuka (*Widget Tree*) menggunakan `StatelessWidget` dan `StatefulWidget`.
-* Mengimplementasikan manajemen status lokal sederhana menggunakan fungsi `setState()`.
-* Melakukan penyesuaian tema visual (*theming*) dan teks antarmuka aplikasi.
-* Melakukan pengujian langsung pada perangkat fisik Android menggunakan koneksi nirkabel (Wireless ADB).
+## 1. Pendahuluan
+Praktikum ini membahas konsep dasar pengembangan aplikasi menggunakan framework Flutter, pemahaman hierarki widget (*Widget Tree*), serta implementasi *state management* lokal sederhana. Fokus utama tugas kali ini adalah memodifikasi alur kerja *Counter App* bawaan Flutter agar sesuai dengan kebutuhan tugas, baik dari segi penyesuaian tema antarmuka, tata letak teks, maupun pengikatan data dinamis ke komponen layar.
 
 ---
 
-### 2. Dasar Teori & Pembahasan Kode
-Aplikasi ini merupakan modifikasi dari *template* dasar Flutter (Counter App). Beberapa komponen utama yang dikonfigurasi:
+## 2. Analisis Kode & Alur Kerja Program
+Aplikasi disusun menggunakan pendekatan berbasis *reactive framework*, di mana tampilan UI akan otomatis menyesuaikan diri ketika terjadi perubahan status nilai pada variabel.
 
-* **MaterialApp & Theme**: Mengatur tema visual aplikasi dengan skema warna dasar biru (`Colors.blue`) dan mengaktifkan Material 3 (`useMaterial3: true`).
-* **AppBar**: Menampilkan judul bilah atas yang disesuaikan menjadi format identitas mahasiswa: `Praktikum 4 - Azis Khoirul Setiawan - 43050250004`.
-* **State Management**: Variabel counter bertambah nilainya secara dinamis setiap kali tombol aksi ditekan melalui pemanggilan method `setState()`.
-* **FloatingActionButton**: Tombol melayang di pojok kanan bawah dengan ikon tambah (`Icons.add`) sebagai pemicu penambahan nilai counter.
+* **Pengaturan Skema Warna & Tema Global**:
+  Properti `ThemeData` dikonfigurasi menggunakan `ColorScheme.fromSeed(seedColor: Colors.blue)` dengan flag `useMaterial3: true`. Pendekatan ini membuat sistem secara otomatis menghitung variasi palet warna turunan untuk elemen seperti `AppBar`, latar tombol, hingga efek ripple ketukan agar serasi dengan aksen biru yang dipilih.
 
----
+* **Penataan Komponen AppBar**:
+  Widget `AppBar` digunakan sebagai bilah navigasi atas untuk memuat identitas pengerjaan tugas secara dinamis. Teks judul diatur agar langsung merepresentasikan informasi praktikum dan nama mahasiswa sehingga mempermudah proses verifikasi hasil kerja[cite: 4, 5].
 
-### 3. Hasil Pengujian & Dokumentasi Antarmuka
-
-Pengujian aplikasi dijalankan pada perangkat Android fisik (Vivo iQOO / I2407) melalui sambungan Wireless ADB dan ditampilkan secara langsung menggunakan `scrcpy`:
-
-<p align="center">
-  <img src="assets/screenshots/desktop_preview.png" width="58%" alt="Tampilan Lingkungan Android Studio & scrcpy" />
-  <img src="assets/screenshots/mobile_preview.jpeg" width="36%" alt="Tampilan Aplikasi pada Perangkat Mobile" />
-</p>
-
-*Keterangan gambar:*
-1. **Sisi Kiri**: Lingkungan pengembangan Android Studio pada sistem operasi Linux (Fedora), menampilkan struktur kode `lib/main.dart`, konfigurasi tema biru, dan sesi aktif terminal `scrcpy`.
-2. **Sisi Kanan**: Tangkapan layar antarmuka aplikasi pada layar ponsel, menunjukkan teks sambutan, judul bilah aplikasi dengan identitas mahasiswa, dan angka counter yang berhasil bertambah.
-
----
-
-### 4. Struktur Percabangan (Git Branch)
-* **`main`**: Berisi implementasi Modul 4 (Dasar Flutter, Counter App bertema biru, dan identitas mahasiswa).
-* **`materi-5`**: Berisi implementasi Modul 5 (Autentikasi Login, Register, Form Validation, dan Dashboard).
-
----
-
-### 5. Panduan Menjalankan Proyek
-1. Beralih ke branch praktikum ini:
-   ```bash
-   git checkout main
+* **Logika Pembaruan State (`setState`)**:
+  Pusat logika perhitungan angka berada di dalam kelas turunan `State<MyHomePage>`. Variabel counter diinisialisasi bertipe integer untuk menampung riwayat klik tombol[cite: 4, 5]. Ketika pengguna menekan tombol aksi, fungsi penambah counter dipanggil:
+  ```dart
+  void _incrementCounter() {
+    setState(() {
+      _counter++;
+    });
+  }
