@@ -50,7 +50,7 @@ class _LoginPageState extends State<LoginPage> {
                   const Icon(
                     Icons.lock_person_rounded,
                     size: 90,
-                    color: Colors.teal,
+                    color: Colors.lightBlueAccent,
                   ),
                   const SizedBox(height: 16),
                   const Text(
@@ -118,7 +118,7 @@ class _LoginPageState extends State<LoginPage> {
 
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.teal,
+                      backgroundColor: Colors.lightBlueAccent,
                       foregroundColor: Colors.white,
                       padding: const EdgeInsets.symmetric(vertical: 16),
                       shape: RoundedRectangleBorder(

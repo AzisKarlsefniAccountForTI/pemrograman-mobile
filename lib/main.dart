@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
       title: 'Praktikum Login & Register',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.teal),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
       ),
       home: const LoginPage(),

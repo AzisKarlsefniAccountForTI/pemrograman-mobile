@@ -11,7 +11,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Dashboard Utama'),
-        backgroundColor: Colors.teal,
+        backgroundColor: Colors.lightBlueAccent,
         foregroundColor: Colors.white,
         automaticallyImplyLeading: false,
       ),
@@ -24,7 +24,7 @@ class HomePage extends StatelessWidget {
               const Icon(
                 Icons.check_circle_outline,
                 size: 80,
-                color: Colors.green,
+                color: Colors.blue,
               ),
               const SizedBox(height: 16),
               const Text(
@@ -37,7 +37,7 @@ class HomePage extends StatelessWidget {
                 style: const TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
-                  color: Colors.teal,
+                  color: Colors.lightBlueAccent,
                 ),
               ),
               const SizedBox(height: 40),

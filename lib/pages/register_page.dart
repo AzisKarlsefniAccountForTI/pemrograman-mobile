@@ -33,7 +33,7 @@ class _RegisterPageState extends State<RegisterPage> {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Registrasi Berhasil! Silakan Login.'),
-          backgroundColor: Colors.green,
+          backgroundColor: Colors.blueAccent,
         ),
       );
       Navigator.pop(context);
@@ -45,7 +45,7 @@ class _RegisterPageState extends State<RegisterPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Daftar Akun Baru'),
-        backgroundColor: Colors.teal,
+        backgroundColor: Colors.blueAccent,
         foregroundColor: Colors.white,
       ),
       body: SafeArea(
@@ -189,7 +189,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.teal,
+                    backgroundColor: Colors.blueAccent,
                     foregroundColor: Colors.white,
                     padding: const EdgeInsets.symmetric(vertical: 16),
                     shape: RoundedRectangleBorder(
