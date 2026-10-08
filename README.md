@@ -12,126 +12,142 @@
 ---
 
 ### Pendahuluan
-Praktikum ini berfokus pada pengenalan konsep dasar framework Flutter, pemahaman hierarki antarmuka melalui susunan widget tree, serta implementasi mekanisme state management lokal. Target utama modul ini adalah memodifikasi alur kerja Counter App bawaan agar memiliki skema warna yang selaras, penataan identitas mahasiswa pada bilah atas, serta pembaruan tampilan antarmuka yang reaktif terhadap input pengguna.
+Praktikum ini membahas dasar-dasar pengembangan aplikasi Android menggunakan framework Flutter. Fokus utama pada modul ini adalah memahami cara kerja hierarki widget (*widget tree*) dan menerapkan pengelolaan data dinamis sederhana melalui mekanisme *state management* lokal. Pada modul ini, saya memodifikasi aplikasi bawaan Flutter (Counter App) agar memiliki tampilan tema biru, menyematkan identitas diri pada bilah atas, serta memastikan angka pada layar dapat bertambah secara tepat setiap kali tombol aksi ditekan.
 
 ---
 
 ### Dasar Teori & Pembahasan Kode
-Flutter membagi komponen antarmuka menjadi dua model utama, yaitu StatelessWidget untuk elemen yang tidak berubah dan StatefulWidget untuk elemen yang memiliki data dinamis selama runtime. Pada modul ini, pengelolaan status dilakukan menggunakan fungsi `setState()`. Fungsi ini bertindak sebagai pemicu agar framework hanya merender ulang komponen teks yang menampilkan angka, sehingga proses rendering berjalan efisien tanpa membebani memori.
+Pada framework Flutter, antarmuka dibangun menggunakan widget. Secara mendasar terdapat dua jenis widget utama:
+1. **StatelessWidget**: Widget statis yang tampilannya tidak berubah sepanjang aplikasi berjalan.
+2. **StatefulWidget**: Widget dinamis yang dapat menyimpan status data (*state*) dan memperbarui tampilannya saat data tersebut mengalami perubahan.
 
-Pewarnaan antarmuka diatur secara global melalui properti `ThemeData` dengan mengaktifkan Material 3 dan memilih biru sebagai warna dasar via `ColorScheme.fromSeed(seedColor: Colors.blue)`. Seluruh hierarki halaman kemudian dibungkus di dalam `Scaffold`, dengan `AppBar` yang menampilkan data identitas mahasiswa serta `FloatingActionButton` sebagai pemicu interaksi penambahan angka.
+Dalam modul ini, saya memanfaatkan `StatefulWidget` dengan fungsi `setState()`. Ketika tombol ditekan, fungsi `setState()` akan memberi sinyal kepada framework bahwa nilai variabel penampung telah berubah. Flutter kemudian hanya merender ulang komponen teks yang menampilkan angka, sehingga performa aplikasi tetap terjaga dan efisien.
 
-Berikut implementasi lengkap pada berkas `lib/main.dart`:
+Selain logika data, saya juga mengatur tema aplikasi melalui `ThemeData` dengan mengaktifkan Material 3 dan menentukan warna dasar biru lewat `ColorScheme.fromSeed(seedColor: Colors.blue)`. Pengaturan ini secara otomatis menyeragamkan warna `AppBar`, tombol, serta latar belakang aplikasi.
+
+Berikut adalah kode lengkap yang saya implementasikan pada berkas `lib/main.dart`:
 
 ```dart
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+   const MyApp({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Aplikasi Pertama',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
-        useMaterial3: true,
-      ),
-      home: const MyHomePage(title: 'Praktikum 4 - Azis Khoirul Setiawan - 43050250004'),
-    );
-  }
+   @override
+   Widget build(BuildContext context) {
+      return MaterialApp(
+         debugShowCheckedModeBanner: false,
+         title: 'Aplikasi Pertama',
+         theme: ThemeData(
+            colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+            useMaterial3: true,
+         ),
+         home: const MyHomePage(title: 'Praktikum 4 - Azis Khoirul Setiawan - 43050250004'),
+      );
+   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-  final String title;
+   const MyHomePage({super.key, required this.title});
 
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
+   final String title;
+
+   @override
+   State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+   int _counter = 0;
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+   // Tugas modul: variabel pesan sambutan
+   String pesan = "Selamat Datang di Modul Pemrograman Mobile Flutter!";
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'Selamat Datang di Modul Pemrograman Mobile Flutter!',
-              textAlign: TextAlign.center,
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+   void _incrementCounter() {
+      setState(() {
+         _counter++;
+      });
+   }
+
+   @override
+   Widget build(BuildContext context) {
+      return Scaffold(
+         appBar: AppBar(
+            title: Text(widget.title),
+            backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+         ),
+         body: Center(
+            child: Column(
+               mainAxisAlignment: MainAxisAlignment.center,
+               children: <Widget>[
+                  // Tugas modul: penempatan pesan di atas counter
+                  Padding(
+                     padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                     child: Text(
+                        pesan,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                           fontSize: 16,
+                           fontWeight: FontWeight.bold,
+                        ),
+                     ),
+                  ),
+                  const SizedBox(height: 20),
+                  const Text('Jumlah tombol ditekan:'),
+                  Text(
+                     '$_counter',
+                     style: Theme.of(context).textTheme.headlineMedium,
+                  ),
+               ],
             ),
-            const SizedBox(height: 20),
-            const Text('Jumlah tombol ditekan:'),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
-    );
-  }
+         ),
+         floatingActionButton: FloatingActionButton(
+            onPressed: _incrementCounter,
+            tooltip: 'Tambah',
+            child: const Icon(Icons.add),
+         ),
+      );
+   }
 }
 ```
 
 ---
 
-### Hasil Pengujian & Analisis Tampilan
+### Hasil Pengujian & Bukti Eksekusi
 
-Aplikasi diuji langsung pada perangkat fisik Android (Vivo iQOO) menggunakan sambungan Wireless ADB dan penampil layar scrcpy untuk mengevaluasi fungsionalitas logika serta kestabilan rendering.
+Aplikasi ini saya uji langsung dengan menjalankannya ke smartphone Android fisik (Vivo iQOO) via Wireless ADB, lalu saya tampilkan layarnya menggunakan alat bantu scrcpy agar proses pengujian dan interaksinya terlihat jelas secara *real-time*.
 
-#### Gambar A: Integrasi Lingkungan Pengembangan dan Eksekusi Kode
+#### Gambar A: Bukti Program Berhasil Dikompilasi dan Berjalan Normal
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/AzisKarlsefniAccountForTI/pemrograman-mobile/main/assets/screenshots/desktop_preview.png" width="85%" alt="Gambar A: Eksekusi Kode dan Integrasi Sistem" />
 </p>
 
-Tangkapan layar di atas memperlihatkan alur kerja saat aplikasi dijalankan melalui Android Studio di lingkungan Linux Fedora. Editor kode menampilkan konfigurasi tema Material 3 dan teks identitas mahasiswa pada AppBar, sementara terminal bawah menunjukkan sesi scrcpy yang aktif terhubung via ADB nirkabel. Pada jendela mirroring di sisi kiri, angka counter berhasil mencapai nilai 12 setelah tombol ditekan secara berulang, membuktikan bahwa logika penambahan angka dan pemanggilan `setState()` berjalan tanpa lag maupun kebocoran memori.
+Tangkapan layar di atas menunjukkan bahwa proses kompilasi kode berhasil tanpa adanya kendala atau galat. Di sisi editor Android Studio, struktur kode mulai dari tema biru hingga parameter identitas diri pada `AppBar` sudah terpasang dengan benar. Sementara itu, pada jendela mirroring di sebelah kiri layar, aplikasi terbukti berhasil menerima aksi sentuhan secara berkelanjutan hingga angka penghitung mencapai nilai **12**. Hal ini membuktikan bahwa fungsi `_incrementCounter()` dan mekanisme pembaruan antarmuka dengan `setState()` berjalan konsisten tanpa hambatan.
 
 ---
 
-#### Gambar B: Tampilan Antarmuka pada Layar Perangkat
+#### Gambar B: Tampilan Nyata Aplikasi di Layar Ponsel
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/AzisKarlsefniAccountForTI/pemrograman-mobile/main/assets/screenshots/mobile_preview.jpeg" width="45%" alt="Gambar B: Tampilan Aplikasi pada Layar Ponsel" />
 </p>
 
-Tangkapan layar ini menunjukkan hasil rendering akhir aplikasi langsung pada layar smartphone. Komponen AppBar di bagian atas menampilkan identitas pengerjaan modul secara proporsional dengan latar warna biru muda bawaan Material 3. Di area tengah, teks sambutan dan teks angka counter tersusun rapi secara vertikal menggunakan widget Column dan Center, didukung oleh FloatingActionButton di pojok kanan bawah yang siap menerima input ketukan berikutnya.
+Tangkapan layar ini memperlihatkan antarmuka aplikasi saat dijalankan langsung pada perangkat ponsel. Bilah `AppBar` di bagian paling atas berhasil menampilkan identitas nama dan NIM secara jelas dengan perpaduan warna biru Material 3. Bagian tengah layar memuat teks petunjuk serta angka counter yang posisinya berada tepat di tengah. Di sudut kanan bawah, tombol aksi `FloatingActionButton` dengan ikon tambah juga terpasang rapi dan langsung merespons ketukan secara instan.
 
 ---
 
 ### Struktur Percabangan Repositori
-Repositori ini mengelola dua branch pengerjaan. Branch `main` difokuskan untuk implementasi Modul 4 yang mencakup dasar Flutter, susunan widget tree, dan aplikasi counter bertema biru. Sementara branch `materi-5` memuat pengembangan lanjutan untuk modul autentikasi seperti halaman login, register, validasi formulir input, dan dashboard utama.
+* **`main`**: Berisi implementasi kode tugas Praktikum 4 (dasar widget, modifikasi tema warna biru, dan pengujian Counter App).
+* **`materi-5`**: Berisi pengerjaan tugas Modul 5 (halaman Login, Register, validasi input formulir, dan Dashboard).
 
 ---
 
-### Panduan Menjalankan Aplikasi
-Untuk menjalankan proyek ini pada branch tugas saat ini, buka terminal di direktori proyek lalu jalankan perintah berikut:
+### Cara Menjalankan Proyek
+Untuk menjalankan kode tugas modul ini pada perangkat yang terhubung, buka terminal pada direktori proyek lalu masukkan perintah berikut:
 
 ```bash
 git checkout main
